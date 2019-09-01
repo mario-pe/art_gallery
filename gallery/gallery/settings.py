@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'art',
+    'shop',
 ]
 
 MIDDLEWARE = [
@@ -120,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'art/templates'),)
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'art/templates', 'shop/templates'),)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
