@@ -27,10 +27,17 @@ class AuthorFactory(factory.DjangoModelFactory):
 class ProductFactory(factory.DjangoModelFactory):
     class Meta:
         model = Product
-        django_get_or_create = ("name", "price", "image", "category", "author")
 
-    title = factory.Sequence(lambda a: "Name_{}".format(a + 1))
-    price = factory.Sequence(lambda a: "Name_{}".format(a + 1))
-    image = the_file = factory.django.FileField(filename="the_image.dat")
+    title = factory.Sequence(lambda a: "title_{}".format(a + 1))
+    price = factory.Sequence(lambda a: a + 1)
+    image = factory.django.ImageField(filename="the_image.dat")
     category = factory.SubFactory(CategoryFactory)
-    author = factory.SubFactory(AuthorFactory)
+
+    @factory.post_generation
+    def authors(self, create, extracted, **kwargs):
+        if not create:
+            return
+
+        if extracted:
+            for author in extracted:
+                self.authors.add(author)
