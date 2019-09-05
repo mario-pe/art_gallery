@@ -35,8 +35,15 @@ class Address(models.Model):
         )
 
 
-class Cart(models.Model):
+class OrderProduct(models.Model):
+    products = models.ManyToManyField(Product)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-    value = models.DecimalField()
+    product_value = models.DecimalField() # property do wyliczenia
+
+
+class Cart(models.Model):
+    cart_value = models.DecimalField() # property do wyliczenia
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    order_product = models.ForeignKey(OrderProduct, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
