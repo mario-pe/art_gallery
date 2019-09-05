@@ -18,4 +18,3 @@ class AuthorTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["categories"]), 3)
-

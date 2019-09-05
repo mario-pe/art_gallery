@@ -3,7 +3,7 @@ from django.conf.urls import url
 from art.views.index import index
 from art.views.author_views import authors, author_details
 from art.views.category_views import categories
-from art.views.product_views import products
+from art.views.product_views import products, product_details
 
 app_name = 'care_point'
 
@@ -14,6 +14,5 @@ urlpatterns = [
     url(r'^authors/(?P<author_id>[0-9]+)/$', author_details, name='author_details'),
     url(r'^categories/$', categories, name='categories'),
     url(r'^product/$', products, name='product'),
-
-
+    url(r'^product/(?P<product_id>[0-9]+)/$', product_details, name='product_details'),
 ]

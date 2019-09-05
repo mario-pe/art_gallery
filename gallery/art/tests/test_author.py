@@ -27,7 +27,8 @@ class AuthorTests(TestCase):
         product2 = ProductFactory().build(author=1)
         response = self.client.get("/art/authors/2/")
         import pdb
+
         pdb.set_trace()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["author"].id, 2)
-        self.assertEqual(len(response.context['product']), 2)
+        self.assertEqual(len(response.context["product"]), 2)

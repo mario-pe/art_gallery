@@ -17,9 +17,9 @@ class ProductTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["products"]), 3)
-    #
-    # def test_should_return_products_details(self):
-    #     response = self.client.get("/art/product/2/")
-    #
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertEqual(len(response.context['product'].id), 2)
+
+    def test_should_return_products_details(self):
+        response = self.client.get("/art/product/2/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["product"].id, 2)

@@ -22,6 +22,7 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^art/', include('art.urls', namespace='art')),
     url(r'^shop/', include('shop.urls', namespace='shop')),
+    url(r'^account/', include('account.urls', namespace='account')),
 ]
 
 # if settings.DEBUG:
