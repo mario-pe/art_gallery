@@ -19,26 +19,21 @@ class LoginForm(forms.Form):
 
 
 class UserSignUpForm(UserCreationForm):
-
     class Meta(UserCreationForm.Meta):
-        fields = ('username', 'first_name', 'last_name')
+        fields = ("username", "first_name", "last_name")
         model = User
-        labels = {
-            'username': 'Login',
-            'first_name': 'Imie',
-            'last_name': 'Nazwisko',
-        }
+        labels = {"username": "Login", "first_name": "Imie", "last_name": "Nazwisko"}
 
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_manager = True
         if commit:
             user.save()
-        point_of_care = self.cleaned_data.get('point_of_care')
+        point_of_care = self.cleaned_data.get("point_of_care")
         Client.objects.create(user=user, point_of_care=point_of_care)
         return user
 
     error_messages = {
-            'unique': "Uzytkownik o takim loginie istnieje.",
-            'password_mismatch': "Hasła muszą być identyczne.",
+        "unique": "Uzytkownik o takim loginie istnieje.",
+        "password_mismatch": "Hasła muszą być identyczne.",
     }

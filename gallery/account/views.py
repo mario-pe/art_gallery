@@ -9,13 +9,13 @@ from django.views.generic import CreateView
 class UserSignUpView(CreateView):
     model = User
     form_class = UserSignUpForm
-    template_name = 'registration/signup_form.html'
+    template_name = "registration/signup_form.html"
 
     def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'manager'
+        kwargs["user_type"] = "manager"
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('art:products')
+        return redirect("art:products")

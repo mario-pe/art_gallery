@@ -18,3 +18,14 @@ class AuthorTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["categories"]), 3)
+
+    def test_should_return_all_products_related_with_category(self):
+        category = Category.objects.first()
+        ProductFactory(category=category).save()
+        ProductFactory(category=category).save()
+
+        response = self.client.get("/art/category/1/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["category"].id, category.id)
+        self.assertEqual(len(response.context["category"].product_set.all()), 2)

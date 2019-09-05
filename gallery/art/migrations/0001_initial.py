@@ -8,36 +8,64 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Author',
+            name="Author",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=256)),
-                ('second_name', models.CharField(max_length=256)),
-                ('birthday', models.DateField(blank=True, null=True)),
-                ('description', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=256)),
+                ("second_name", models.CharField(max_length=256)),
+                ("birthday", models.DateField(blank=True, null=True)),
+                ("description", models.TextField()),
             ],
         ),
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256)),
             ],
         ),
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=256)),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('image', models.ImageField(upload_to='')),
-                ('authors', models.ManyToManyField(to='art.Author')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='art.Category')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=256)),
+                ("price", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("image", models.ImageField(upload_to="")),
+                ("authors", models.ManyToManyField(to="art.Author")),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="art.Category"
+                    ),
+                ),
             ],
         ),
     ]

@@ -1,5 +1,3 @@
-from unittest import skip
-
 from art.models import Author
 from art.tests.factories import AuthorFactory, ProductFactory
 from django.test import TestCase
@@ -21,14 +19,12 @@ class AuthorTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["authors"]), 3)
 
-    @skip
     def test_should_return_desired_author_details_with_list_of_related_products(self):
-        product1 = ProductFactory().build(author=1)
-        product2 = ProductFactory().build(author=1)
-        response = self.client.get("/art/authors/2/")
-        import pdb
+        author = Author.objects.first()
+        ProductFactory(authors=[author.id]).save()
+        ProductFactory(authors=[author.id]).save()
+        response = self.client.get("/art/authors/1/")
 
-        pdb.set_trace()
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context["author"].id, 2)
-        self.assertEqual(len(response.context["product"]), 2)
+        self.assertEqual(response.context["author"].id, author.id)
+        self.assertEqual(len(response.context["author"].product_set.all()), 2)

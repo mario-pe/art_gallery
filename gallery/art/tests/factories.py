@@ -32,6 +32,7 @@ class ProductFactory(factory.DjangoModelFactory):
     price = factory.Sequence(lambda a: a + 1)
     image = factory.django.ImageField(filename="the_image.dat")
     category = factory.SubFactory(CategoryFactory)
+    authors = factory.SubFactory(AuthorFactory)
 
     @factory.post_generation
     def authors(self, create, extracted, **kwargs):

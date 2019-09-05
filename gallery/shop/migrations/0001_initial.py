@@ -9,28 +9,46 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('account', '0001_initial'),
-        ('art', '0001_initial'),
-    ]
+    dependencies = [("account", "0001_initial"), ("art", "0001_initial")]
 
     operations = [
         migrations.CreateModel(
-            name='Order',
+            name="Order",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('order_date', models.DateField(blank=True, null=True)),
-                ('acceptance_date', models.DateField(blank=True, null=True)),
-                ('realization_date', models.DateField(blank=True, null=True)),
-                ('payment_date', models.DateField(blank=True, null=True)),
-                ('products', models.ManyToManyField(to='art.Product')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("order_date", models.DateField(blank=True, null=True)),
+                ("acceptance_date", models.DateField(blank=True, null=True)),
+                ("realization_date", models.DateField(blank=True, null=True)),
+                ("payment_date", models.DateField(blank=True, null=True)),
+                ("products", models.ManyToManyField(to="art.Product")),
             ],
         ),
         migrations.CreateModel(
-            name='Client',
+            name="Client",
             fields=[
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shop.Order')),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        serialize=False,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "order",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="shop.Order"
+                    ),
+                ),
             ],
         ),
     ]
