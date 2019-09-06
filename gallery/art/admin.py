@@ -3,7 +3,7 @@ from .models import *
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name")
+    list_display = ("name",)
 
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -11,9 +11,9 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    title = models.CharField(max_length=256)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    authors = models.ManyToManyField(Author)
-    list_display = ("title",)
+    list_display = ("title", "price", "image", "category", "get_authors")
+
+
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Author, AuthorAdmin)
+admin.site.register(Product, ProductAdmin)

@@ -18,3 +18,6 @@ class Product(models.Model):
     image = models.ImageField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     authors = models.ManyToManyField(Author)
+
+    def get_authors(self):
+        return ",".join([str(p) for p in self.authors.all()])
