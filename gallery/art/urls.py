@@ -17,6 +17,6 @@ urlpatterns = [
         category_products,
         name="category_products",
     ),
-    url(r"^product/$", products, name="product"),
+    url(r"^products/$", products, name="products"),
     url(r"^product/(?P<product_id>[0-9]+)/$", product_details, name="product_details"),
 ]

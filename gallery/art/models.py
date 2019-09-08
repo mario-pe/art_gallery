@@ -15,7 +15,7 @@ class Author(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return "{}, {}".format(self.first_name, self.second_name)
+        return "{} {}".format(self.first_name, self.second_name)
 
 
 class Product(models.Model):

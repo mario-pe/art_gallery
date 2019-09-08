@@ -13,7 +13,7 @@ class ProductTests(TestCase):
         self.assertEqual(3, len(Product.objects.all()))
 
     def test_should_return_all_products(self):
-        response = self.client.get("/art/product/")
+        response = self.client.get("/art/products/")
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["products"]), 3)

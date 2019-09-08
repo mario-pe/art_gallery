@@ -11,7 +11,10 @@ def cart(request, product_id):
     user = Client.objects.all()  #to co z klentem
 
     cart = Cart.objects.filter(pk=1)  # albo z sessji
-    product = Product.objects.filtre(pk=product_id).first()
+    products = Product.objects.filtre(pk=product_id).first()
     # z requesta skąd przyszedl i przekierowac go tam
 
-    return render(request, "art/cart/authors.html", {"authors": authors})
+    return render(request, "art/cart/authors.html", {"products": products})
+
+def add_to_cart(request, product_id):
+    pass

@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 
 {%  block body %}
-    {{ author }}
-    {{ author_products }}
+<h3>{{ author }}</h3>
+<h5>{{ author.birthday }}</h5>
+<p>{{ author.description }}</p>
+
+<table class="table table-hover">
+    <tbody>
+        <tr>
+            <div class="col-sm-12 col-md-12">
+                <h4>Twórczość {{ author }} </h4>
+                {% for a in author_products %}
+                    <a href="{% url 'art:product_details' a.id %}">  a.title </a>
+                    <a href="{% url 'shop:add_to_cart' a.id %}"> <button class="btn btn-info btn-md">Dodaj do koszyka </button></a>
+                {% endfor %}
+            </div>
+        </tr>
+    </tbody>
+</table>
 {% endblock %}
