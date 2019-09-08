@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
 {%  block body %}
-    {{ category
-    {{ category_products }}
+<h3>{{ author }}</h3>
+
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+            <th scope="col"></th>
+            <th scope="col">Miniatura</th>
+            <th scope="col">Tytuł</th>
+            <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for p in category_products %}
+            <tr>
+                <td></td>
+                <td><a href="{% url 'art:product_details' p.id %}">  miniatura </a></td>
+                <td><a href="{% url 'art:product_details' p.id %}">  p.title </a></td>
+                <td><a href="{% url 'shop:add_to_cart' p.id %}"> <button class="btn btn-info btn-md">Dodaj do koszyka </button></a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 
 {%  block body %}
-    {{ categories }}
+
+<h4>Kategorie</h4>
+<table class="table table-hover">
+    <tbody>
+    {% for c in categories %}
+    <tr>
+        <td>
+            <div class="col-sm-12 col-md-12">
+                <div class="conteiner-fluid">
+                        <a href="{% url 'art:category_products' c.id %}">  {{ c }} </a>
+                </div>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
 
