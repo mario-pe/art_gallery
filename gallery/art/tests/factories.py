@@ -33,6 +33,7 @@ class ProductFactory(factory.DjangoModelFactory):
     image = factory.django.ImageField(filename="the_image.dat")
     category = factory.SubFactory(CategoryFactory)
     authors = factory.SubFactory(AuthorFactory)
+    number = factory.Sequence(lambda a: a + 1)
 
     @factory.post_generation
     def authors(self, create, extracted, **kwargs):

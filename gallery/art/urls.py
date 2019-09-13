@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 
 from gallery import settings
 
-app_name = "care_point"
+app_name = "art"
 
 urlpatterns = [
     url(r"^$", index, name="index"),

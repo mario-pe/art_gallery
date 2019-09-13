@@ -8,11 +8,11 @@
 <h4>Autor</h4>
 <table class="table table-hover">
     <tbody>
-    {% for a in product.authors.all %}
+    {% for author in product.authors.all %}
         <tr>
             <div class="col-sm-12 col-md-12">
                 <div class="conteiner-fluid">
-                    <td><a href="{% url 'art:author_details' a.id %}">  {{ a }} </a></td>
+                    <td><a href="{% url 'art:author_details' author.id %}">  {{ author }} </a></td>
                 </div>
             </div>
         </tr>
