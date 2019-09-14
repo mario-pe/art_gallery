@@ -2,7 +2,21 @@
 
 {%  block body %}
 
-{% if products %}
+{% if personal_data %}
+<h4>Dane zamawiajacego</h4>
+<table class="table table-hover">
+    </tbody>
+        {% for key,value in personal_data.items %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endif %}
+{% if cart %}
 <table class="table table-hover">
     <thead>
       <tr>
@@ -29,8 +43,8 @@
         {% endfor %}
     </tbody>
 </table>
-<h5> Wartość koszyka: {{ cart_value }}</h5>
-<a href="{% url 'shop:make_no_logged_user_order' %}"> <button class="btn btn-info btn-md">Zamów</button></a>
+<h5> Wartość zamówienia: {{ cart_value }}</h5>
+<a href="{% url 'shop:make_no_logged_user_order' %}"> <button class="btn btn-info btn-md">Potwierdz zamówienie</button></a>
 {% else %}
  <h3> Twój koszyk jest pusty.</h3>
 {% endif %}
