@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
 {%  block body %}
+
+{% if products %}
 <table class="table table-hover">
     <thead>
       <tr>
             <th scope="col"></th>
             <th scope="col">Miniatura</th>
             <th scope="col">Tytuł</th>
-            <th scope="col">Dostępna ilość</th>
+            <th scope="col">Zamówiona ilość</th>
             <th scope="col"></th>
       </tr>
     </thead>
@@ -17,9 +19,13 @@
                 <td><img src="gallery/media/{{ p.image }}" alt="img"></td>
                 <td><a href="{% url 'art:product_details' p.id %}">  {{ p.image }} </a></td>
                 <td><a href="{% url 'art:product_details' p.id %}">  {{ p.title }} </a></td>
-                <td><a href="{% url 'art:product_details' p.id %}">  {{ p.number }} </a></td>
+                <td><a href="{% url 'art:product_details' p.id %}">  {{ p.quantity }} </a></td>
+                <td><a href="{% url 'shop:remove_from_cart' p.id %}"> <button class="btn btn-info btn-md">Usuń z koszyka</button> </a></td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
+{% else %}
+ <h3> Twój koszyk jest pusty.</h3>
+{% endif %}
 {% endblock %}

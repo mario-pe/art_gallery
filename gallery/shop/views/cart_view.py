@@ -13,13 +13,12 @@ def cart(request):
     if request.session.get("cart"):
         cart = request.session.get("cart")
         products = []
-        import ipdb
-        ipdb.set_trace()
         for c in cart:
             product = Product.objects.filter(pk=c.get("product_id")).first()
+            product.quantity = c.get("quantity")
             products.append(product)
-
-    return render(request, "shop/cart/cart.html", {"products": products})
+        return render(request, "shop/cart/cart.html", {"products": products})
+    return render(request, "shop/cart/cart.html")
 
 
 def add_to_cart(request, product_id):
@@ -45,7 +44,7 @@ def add_to_cart(request, product_id):
                 }
                 cart.append(order_product)
                 request.session["cart"] = cart
-        return redirect("art:product_details", product_id=product_id)
+        return redirect("shop:cart")
     else:
         form = OrderProductForm(initial={"quantity": 1})
         return render(
@@ -53,7 +52,10 @@ def add_to_cart(request, product_id):
         )
 
 
-def confirm_add_to_cart(request):
-
-    oder_product = "order prod"
-    return render(request, "shop/cart/add_to_cart.html", {"oder_product": oder_product})
+def remove_from_cart(request, product_id):
+    cart = request.session.get("cart")
+    for item in cart:
+        if item.get("product_id") == product_id:
+            cart.remove(item)
+            request.session["cart"] = cart
+    return redirect("shop:cart")
