@@ -17,6 +17,7 @@
                 <td><img src="gallery/media/{{ p.image }}" alt="img"></td>
                 <td><a href="{% url 'art:product_details' p.id %}">  {{ p.image }} </a></td>
                 <td><a href="{% url 'art:product_details' p.id %}">  {{ p.title }} </a></td>
+                <td><a href="{% url 'art:product_details' p.id %}">  {{ p.price }} </a></td>
                 <td><a href="{% url 'art:product_details' p.id %}">  {{ p.number }} </a></td>
                 <td><a href="{% url 'shop:add_to_cart' p.id %}"> <button class="btn btn-info btn-md">Dodaj do koszyka </button></a></td>
             </tr>
