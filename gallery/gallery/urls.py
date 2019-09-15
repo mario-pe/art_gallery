@@ -22,7 +22,8 @@ urlpatterns = [
     url("admin/", admin.site.urls),
     url(r"^art/", include("art.urls", namespace="art")),
     url(r"^shop/", include("shop.urls", namespace="shop")),
-    url(r"^account/", include("account.urls", namespace="account")),
+    url(r"^user/", include("account.urls", namespace="user")),
+    url(r"^account/", include('django.contrib.auth.urls')),
 ]
 
 # if settings.DEBUG:

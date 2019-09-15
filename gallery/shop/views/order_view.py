@@ -1,6 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
-from shop.models import Order
 from shop.views.cart_view import prepare_products_from_cart
 from art.models import Product
 
@@ -44,20 +43,23 @@ def make_no_logged_user_order(request):
         # ["perkowski.mar@gmail.com"],
         [personal_data.get("email"), "jolanta_parczynska@wp.pl"],
         fail_silently=False,
-        )
+    )
     products = Product.objects.all()
     return render(request, "art/product/products.html", {"products": products})
 
 
 def __prepare_email_message(personal_data, products, cart_value):
     message = ""
-    header = "Potwierdzajacy złożenia zamówienia W Galerii Parczyńskich \n" \
-    " Wartość zamowienia: {}. \n " \
-    "Pieniadze nalezy przelac na konto nr 1234. \n".format(cart_value)
+    header = (
+        "Potwierdzajacy złożenia zamówienia W Galerii Parczyńskich \n"
+        " Wartość zamowienia: {}. \n "
+        "Pieniadze nalezy przelac na konto nr 1234. \n".format(cart_value)
+    )
     personal_data = __prepare_string_with_personal_data(personal_data)
     product_list = __preapre_sting_with_produckt_list(products)
     message + header + personal_data + product_list
     return message + header + personal_data + product_list
+
 
 def __prepare_string_with_personal_data(personal_data):
     message = "\n Dane zamawiającego: \n"
@@ -70,11 +72,14 @@ def __prepare_string_with_personal_data(personal_data):
     message = message + "miasto: {}\n".format(personal_data.get("city"))
     return message
 
+
 def __preapre_sting_with_produckt_list(products):
     message = "\n Zamówione produkty: \n"
     message = message + "tytuł,  cena, ilość, wartość pozycji \n"
     for product in products:
-        prod_string = "{},  {},  {},  {} \n".format(product.title, product.price, product.quantity, product.value)
+        prod_string = "{},  {},  {},  {} \n".format(
+            product.title, product.price, product.quantity, product.value
+        )
         message = message + prod_string
     return message
 

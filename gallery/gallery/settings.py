@@ -128,3 +128,7 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = "mariusz-perkowski@wp.pl"
 EMAIL_HOST_PASSWORD = "1648mp"
 EMAIL_USE_SSL = True
+
+
+LOGIN_REDIRECT_URL = '/art/products/'
+LOGOUT_REDIRECT_URL = '/art/products/'

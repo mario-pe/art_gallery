@@ -20,8 +20,8 @@
             <div class="col-sm-12 col-md-7">
                 <div class="panel panel-default">
                     <form class="form-horizontal"  method="post">
-                        {{ form.as_p }}
                         {% csrf_token %}
+                        {{ form.as_p }}
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                  <button type="submit" class="btn btn-success btn-sm">
