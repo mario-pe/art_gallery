@@ -122,3 +122,9 @@ TEMPLATE_DIRS = (os.path.join(BASE_DIR, "art/templates", "shop/templates"),)
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MEDIA_URL = "/media/"
+
+EMAIL_HOST = 'smtp.wp.pl'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "mariusz-perkowski@wp.pl"
+EMAIL_HOST_PASSWORD = "1648mp"
+EMAIL_USE_SSL = True
