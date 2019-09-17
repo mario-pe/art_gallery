@@ -6,3 +6,4 @@ class User(AbstractUser):
     username = models.CharField(max_length=30, unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=100, unique=True)

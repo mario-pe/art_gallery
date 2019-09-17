@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 
 {%  block body %}
-
-{% if personal_data %}
-<h4>Dane zamawiajacego</h4>
 <table class="table table-hover">
     </tbody>
         {% for key,value in personal_data.items %}
@@ -15,9 +12,10 @@
     </tbody>
 </table>
 
-{% endif %}
+
 {% if cart %}
-    <table class="table table-hover">
+
+<table class="table table-hover">
         <thead>
           <tr>
                 <th scope="col"></th>
@@ -43,10 +41,31 @@
             {% endfor %}
         </tbody>
     </table>
-    <h5> Wartość zamówienia: {{ cart_value }}</h5>
-<a href="{% url 'shop:make_no_logged_user_order' %}"> <button class="btn btn-info btn-md">Złóż zamówienie</button></a>
+<h5> Wartość zamówienia: {{ cart_value }}</h5>
+
+{% if addresses %}
+
+<form method="POST" action="{% url 'shop:make_logged_user_order' %}">
+    {% csrf_token %}
+    <select name="address_id">
+        {% for address in addresses %}
+            <option value="{{ address.id }}">{{ address }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Złóż zamówienie"class="btn btn-info btn-md"></imput>
+</form>
+
+{% endif %}
+</br>
+</br>
+<a href="{% url 'shop:add_address' %}"> <button class="btn btn-info btn-md">Dodaj adres</button></a>
+
+
+
 {% else %}
     <h3> Twój koszyk jest pusty.</h3>
 {% endif %}
-{% endblock %}
 
+
+
+{% endblock %}

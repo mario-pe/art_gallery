@@ -30,7 +30,7 @@
     </tbody>
 </table>
 <h5> Wartość koszyka: {{ cart_value }}</h5>
-<a href="{% url 'shop:prepare_no_logged_user_order' %}"> <button class="btn btn-info btn-md">Zamów</button></a>
+<a href="{% url 'shop:confirm_order' %}"> <button class="btn btn-info btn-md">Zamów</button></a>
 {% else %}
  <h3> Twój koszyk jest pusty.</h3>
 {% endif %}

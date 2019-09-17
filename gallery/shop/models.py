@@ -1,22 +1,13 @@
 from django.db import models
-from art.models import Product
 from account.models import User
 
 
-class Order(models.Model):
-    order_date = models.DateField(blank=True, null=True)
-    acceptance_date = models.DateField(blank=True, null=True)
-    realization_date = models.DateField(blank=True, null=True)
-    payment_date = models.DateField(blank=True, null=True)
-    products = models.ManyToManyField(Product)
-
-    def __str__(self):
-        return "{}, {}".format(self.order_date, self.acceptance_date)
+class OrderProduct(models.Model):
+    quantity = models.IntegerField()
 
 
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{}, {}".format(self.user.first_name, self.user.last_name)
@@ -35,10 +26,17 @@ class Address(models.Model):
         )
 
 
-class OrderProduct(models.Model):
-    product = models.ManyToManyField(Product)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
-    quantity = models.IntegerField()
+class Order(models.Model):
+    order_date = models.DateField(blank=True, null=True)
+    acceptance_date = models.DateField(blank=True, null=True)
+    realization_date = models.DateField(blank=True, null=True)
+    payment_date = models.DateField(blank=True, null=True)
+    order_product = models.ManyToManyField(OrderProduct)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, blank=True, null=True)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return "{}, {}".format(self.order_date, self.acceptance_date)
 
 
 class Cart(models.Model):

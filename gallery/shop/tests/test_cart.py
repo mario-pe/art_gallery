@@ -9,8 +9,6 @@ from shop.models import Cart
 class CartTests(TestCase):
     def test_should_add_product_to_cart(self):
         response = self.client.get("/shop/add_to_cart/1/")
-        # import ipdb
-        # ipdb.set_trace()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["cart"]), 1)
 
