@@ -15,7 +15,7 @@
     <tbody>
         {% for p in products %}
             <tr>
-                <td><img src="gallery/media/{{ p.image }}" alt="img"></td>
+                <td><img src="{{ p.image.url }}" alt="img"></td>
                 <td><a href="{% url 'art:product_details' p.id %}">  {{ p.image }} </a></td>
                 <td><a href="{% url 'art:product_details' p.id %}">  {{ p.title }} </a></td>
                 <td><a href="{% url 'art:product_details' p.id %}">  {{ p.price }} </a></td>
