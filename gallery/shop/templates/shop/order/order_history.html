@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{%  block body %}
+
+{% if orders %}
+    <table class="table table-hover">
+        <thead>
+          <tr>
+                <th scope="col">Data zamowienia</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td><a href="{% url 'shop:order_details' order.id %}">  {{ order.order_date }} </a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+
+{% endblock %}

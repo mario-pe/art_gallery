@@ -1,9 +1,14 @@
 from django.db import models
+from art.models import Product
 from account.models import User
+
 
 
 class OrderProduct(models.Model):
     quantity = models.IntegerField()
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
+    value = models.DecimalField(max_digits=10, decimal_places=2)
+
 
 
 class Client(models.Model):

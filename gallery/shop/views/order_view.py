@@ -89,6 +89,32 @@ def make_logged_user_order(request):
     return render(request, "art/product/products.html", {"products": products_in_store})
 
 
+def user_order_history(request):
+    orders = Order.objects.filter(client_id=request.user.pk).all()
+    return render(
+        request,
+        "shop/order/order_history.html",
+        {
+            "orders": orders,
+        },
+    )
+
+
+def order_details(request, order_id):
+    order = Order.objects.filter(pk=order_id).first()
+    order_produckts = order.order_product.all()
+    request.user.pk
+    return render(
+        request,
+        "shop/order/order_details.html",
+        {
+            "order": order,
+            "order_produckts": order_produckts
+        },
+    )
+
+
+
 def __prepare_email_message(personal_data, products, cart_value):
     message = ""
     header = (
@@ -170,6 +196,7 @@ def add_order_products_to_order(order, cart):
         order_product = OrderProduct()
         order_product.quantity = quantity
         order_product.product = product
+        order_product.value = product.value
         order_product.save()
         order.order_product.add(order_product)
     return order

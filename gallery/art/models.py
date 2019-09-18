@@ -1,7 +1,5 @@
 from django.db import models
 
-from shop.models import OrderProduct
-
 
 class Category(models.Model):
     name = models.CharField(max_length=256)
@@ -27,8 +25,6 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     authors = models.ManyToManyField(Author)
     number = models.IntegerField(blank=True, null=True)
-    order_produckt = models.ForeignKey(OrderProduct, on_delete=models.CASCADE)
-
 
 
     def get_authors(self):

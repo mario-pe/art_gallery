@@ -43,6 +43,7 @@
                         {% if user.is_authenticated %}
                          <li><a href="{% url 'login' %}">Witaj {{ user.username }}!</a></li>
                          <li><a href="{% url 'logout' %}">logout</a></li>
+                         <li><a href="{% url 'shop:user_order_history' %}">Historia zamowień</a></li>
                         {% else %}
                           <li><a href="{% url 'login' %}">login</a></li>
                           <li><a href="{% url 'user:user_signup' %}">Dołącz do nas</a></li>
