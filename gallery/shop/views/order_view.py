@@ -196,7 +196,9 @@ def add_order_products_to_order(order, cart):
         order_product = OrderProduct()
         order_product.quantity = quantity
         order_product.product = product
-        order_product.value = product.value
+        import ipdb
+        ipdb.set_trace()
+        order_product.value = float(product.price) * int(quantity)
         order_product.save()
         order.order_product.add(order_product)
     return order
