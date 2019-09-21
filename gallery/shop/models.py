@@ -3,12 +3,12 @@ from art.models import Product
 from account.models import User
 
 
-
 class OrderProduct(models.Model):
     quantity = models.IntegerField()
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, blank=True, null=True
+    )
     value = models.DecimalField(max_digits=10, decimal_places=2)
-
 
 
 class Client(models.Model):
@@ -38,12 +38,9 @@ class Order(models.Model):
     payment_date = models.DateField(blank=True, null=True)
     order_product = models.ManyToManyField(OrderProduct)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, blank=True, null=True)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True, null=True)
+    address = models.ForeignKey(
+        Address, on_delete=models.CASCADE, blank=True, null=True
+    )
 
     def __str__(self):
         return "{}, {}".format(self.order_date, self.acceptance_date)
-
-
-class Cart(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, blank=True, null=True)
-    order_product = models.ForeignKey(OrderProduct, on_delete=models.CASCADE, blank=True, null=True)

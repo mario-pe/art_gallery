@@ -22,13 +22,18 @@ def add_to_cart(request, product_id):
 
     if request.method == "POST":
         form = OrderProductForm(data=request.POST)
+
         if form.is_valid():
             quantity = form.data.get("quantity")
             if request.session.get("cart"):
+                # import ipdb
+                # ipdb.set_trace()
                 cart = request.session.get("cart")
                 cart = __add_to_cart(product_id, cart, quantity)
                 request.session["cart"] = cart
             else:
+                # import ipdb
+                # ipdb.set_trace()
                 cart = []
                 order_product = {"product_id": product_id, "quantity": quantity}
                 cart.append(order_product)
@@ -44,7 +49,7 @@ def add_to_cart(request, product_id):
 def remove_from_cart(request, product_id):
     cart = request.session.get("cart")
     for item in cart:
-        if item.get("product_id") == product_id:
+        if item.get("product_id") == int(product_id):
             cart.remove(item)
             request.session["cart"] = cart
     return redirect("shop:cart")
@@ -52,7 +57,7 @@ def remove_from_cart(request, product_id):
 
 def __add_to_cart(product_id, products, quantity):
     for product in products:
-        if product_id == product.get("product_id"):
+        if int(product_id) == int(product.get("product_id")):
             return __add_quantity_if_the_same_product_exist(product, products, quantity)
     return __add_product_to_list(product_id, products, quantity)
 
@@ -69,15 +74,6 @@ def __add_product_to_list(product_id, products, quantity):
     return products
 
 
-def __count_order_product_value(product, quantity):
-    value = float(product.price) * int(quantity)
-    return round(value, 2)
-
-
-def __add_product_value_cart_value(cart_value, product):
-    cart_value = cart_value + product.value
-    return round(cart_value, 2)
-
 def prepare_products_from_cart(cart):
     products = []
     cart_value = 0.00
@@ -89,3 +85,13 @@ def prepare_products_from_cart(cart):
         cart_value = __add_product_value_cart_value(cart_value, product)
         products.append(product)
     return products, cart_value
+
+
+def __add_product_value_cart_value(cart_value, product):
+    cart_value = cart_value + product.value
+    return round(cart_value, 2)
+
+
+def __count_order_product_value(product, quantity):
+    value = float(product.price) * int(quantity)
+    return round(value, 2)

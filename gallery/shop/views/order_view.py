@@ -19,6 +19,7 @@ def confirm_order(request):
 
 
 def prepare_logged_user_order(request):
+
     client = Client.objects.filter(pk=request.user.pk).first()
     addresses = Address.objects.filter(client=client).all()
     cart = request.session.get("cart")
@@ -91,28 +92,18 @@ def make_logged_user_order(request):
 
 def user_order_history(request):
     orders = Order.objects.filter(client_id=request.user.pk).all()
-    return render(
-        request,
-        "shop/order/order_history.html",
-        {
-            "orders": orders,
-        },
-    )
+    return render(request, "shop/order/order_history.html", {"orders": orders})
 
 
 def order_details(request, order_id):
     order = Order.objects.filter(pk=order_id).first()
-    order_produckts = order.order_product.all()
+    order_products = order.order_product.all()
     request.user.pk
     return render(
         request,
         "shop/order/order_details.html",
-        {
-            "order": order,
-            "order_produckts": order_produckts
-        },
+        {"order": order, "order_products": order_products},
     )
-
 
 
 def __prepare_email_message(personal_data, products, cart_value):
@@ -175,7 +166,6 @@ def get_client_personal_data_from_db(client, address=None):
         personal_data["city"] = address.city
         personal_data["zip_code"] = address.zip_code
 
-
     return personal_data
 
 
@@ -187,6 +177,7 @@ def __save_order_to_db(cart, client, address):
     order.address = address
     order.order_date = datetime.datetime.now()
     order.save()
+
 
 def add_order_products_to_order(order, cart):
     order.save()
@@ -200,6 +191,7 @@ def add_order_products_to_order(order, cart):
         order_product.save()
         order.order_product.add(order_product)
     return order
+
 
 def send_confirm_mail(message, mail):
     send_mail(

@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 
 {%  block body %}
-
 <p>{{ order.order_date }}</p>
 <p>{{ order.address }}</p>
-{% if order_produckts %}
+{% if order_products %}
     <table class="table table-hover">
         <thead>
           <tr>
@@ -17,14 +16,14 @@
           </tr>
         </thead>
         <tbody>
-            {% for p in order_produckts %}
+            {% for p in order_products %}
                 <tr>
-                    <td><img src="gallery/media/{{ p.image }}" alt="img"></td>
-                    <td><a href="{% url 'art:product_details' p.id %}">  {{ p.product.image }} </a></td>
-                    <td><a href="{% url 'art:product_details' p.id %}">  {{ p.product.title }} </a></td>
-                    <td><a href="{% url 'art:product_details' p.id %}">  {{ p.product.price }} </a></td>
-                    <td><a href="{% url 'art:product_details' p.id %}">  {{ p.quantity }} </a></td
-                    ><td><a href="{% url 'art:product_details' p.id %}">  {{ p.value }} </a></td>
+                    <td><a href="{% url 'art:product_details' p.product.id %}"><img src="{{ p.product.image.url }}" alt="img"></a></td>
+                    <td><a href="{% url 'art:product_details' p.product.id %}">  {{ p.product.image }} </a></td>
+                    <td><a href="{% url 'art:product_details' p.product.id %}">  {{ p.product.title }} </a></td>
+                    <td><a href="{% url 'art:product_details' p.product.id %}">  {{ p.product.price }} </a></td>
+                    <td><a href="{% url 'art:product_details' p.product.id %}">  {{ p.quantity }} </a></td
+                    ><td><a href="{% url 'art:product_details' p.product.id %}">  {{ p.value }} </a></td>
                 </tr>
             {% endfor %}
         </tbody>
